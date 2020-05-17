@@ -25,11 +25,7 @@ public enum Patterns {
   NOT_WELL_TESTED("\\d{8}_\\d{6}.*.jpg", f -> {
     return Optional.of(f.getName().substring(0, 8));
   }, 3),
-  NOT_WELL_TESTED1((file) -> {
-//    System.out.println(file.getName() + " " + getCreationDateTime(file).get());
-    return true;
-  }, f -> List.of(Patterns.getLastModificationDateTime(f).get(), Patterns.getCreationDateTime(f).get()).stream()
-      .sorted(Comparator.comparing(e -> e)).findFirst(), 4);
+  NOT_WELL_TESTED1((file) -> true, f -> List.of(Patterns.getLastModificationDateTime(f).get(), Patterns.getCreationDateTime(f).get()).stream().min(Comparator.comparing(e -> e)), 4);
 
   private final Function<File, Optional<String>> extractor;
   private final Predicate<File> regexMather;

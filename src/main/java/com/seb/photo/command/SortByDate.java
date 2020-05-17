@@ -27,10 +27,8 @@ public class SortByDate implements PhotoCommand {
             if (outputDir != null) {
               FileUtils.moveFileToDirectory(f, Paths.get(outputDir).resolve(e.getKey()).toFile(), true);
             }
-//            System.out.printf("moving %s to %s%n", f, Paths.get(outputDir).resolve(e.getKey()).toFile());
             return Stream.of(e.getKey() + " " + f.getName());
           } catch (Exception ex) {
-//            System.err.println(f);
             return Stream.empty();
           }
         })).collect(joining("\n")));
